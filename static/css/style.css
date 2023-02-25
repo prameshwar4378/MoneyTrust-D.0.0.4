@@ -455,24 +455,61 @@ a {
 
 
 
+
 /* carosual Start */
 
 .carousel-item .img1{
 	background: url(../img/carousel-1.jpeg);
 	height: 500px;
+	background-repeat: no-repeat;
+	background-size: 100%;
 }
 
 .carousel-item .img2{
 	background: url(../img/carousel-2.jpeg);
 	height: 500px;
+	background-repeat: no-repeat;
+	background-size: 100%;
 }
 
 .carousel-item .img3{
 	background: url(../img/carousel-3.jpeg);
 	height: 500px;
+	background-repeat: no-repeat;
+	background-size: 100%;
 }
 
+
+@media screen and (max-width:600px){
+	
+.carousel-item .img1{
+	background: url(../img/carousel-1.jpeg);
+	height: 300px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.carousel-item .img2{
+	background: url(../img/carousel-2.jpeg);
+	height: 300px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.carousel-item .img3{
+	background: url(../img/carousel-3.jpeg);
+	height: 300px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+
+}
 /* Carosual Stop */
+
+
+
+
 .service-cards{
 	background-color: #07043f;
 	border-radius: 7px;
