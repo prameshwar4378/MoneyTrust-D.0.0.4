@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block links %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+{% endblock links %}
+
+
 {% block style %}
 
 .flip-card {
@@ -31,6 +38,7 @@ width: 100%;
 height: 100%;
 -webkit-backface-visibility: hidden;
 backface-visibility: hidden;
+cursor:pointer;
 }
 
 .flip-card-front {
@@ -42,6 +50,9 @@ box-shadow:0px 0px 7px;
 padding:10px;
 }
 
+..flip-card-front span{
+color:green;
+}
 .flip-card-back {
 background-color: #FF0042;
 color: white;
@@ -52,9 +63,9 @@ box-shadow:0px 0px 7px;
 padding:10px;
 }
 
-.flip-card-back a{
+.flip-card-back {
 text-decoration:none;
-color:#AFFAF2;
+color:#fff;
 font-size:13px;
 }
 
@@ -342,32 +353,63 @@ animation: fadeEffect 1s;
 }
 
 @keyframes fadeEffect {
-    0% {
-        opacity: 0;
-        transform: translateX(100px);
-     }
+0% {
+opacity: 0;
+transform: translateX(100px);
+}
 
-     100% {
-        opacity: 1;
-        transform: translateX(0);
-     }
-  }
-  
+100% {
+opacity: 1;
+transform: translateX(0);
+}
+}
+
+
+
+
+
+
+{% comment %} Our Clients Logo Slider Start {% endcomment %}
+
+/* Clients Section
+--------------------------------*/
+#clients {
+padding: 60px 0;
+}
+
+#clients img {
+opacity: 0.5;
+transition: 0.3s;
+width:70%;
+}
+
+#clients img:hover {
+opacity: 1;
+}
+
+#clients .swiper-pagination {
+margin-top: 30px;
+position: relative;
+}
+
+#clients .swiper-pagination .swiper-pagination-bullet {
+width: 12px;
+height: 12px;
+background-color: #fff;
+opacity: 1;
+border: 1px solid #B40018;
+}
+
+#clients .swiper-pagination .swiper-pagination-bullet-active {
+background-color: #B40018;
+}
+
+{% comment %} Our Clients Logo Slider Start {% endcomment %}
+
+
+
 {% endblock style %}
 
-
-
-
-{% block header %}
-
-<script>
-    $(function () {
-
-        $("#personal_loan_calculator").load("{% static 'calculator.html' %}");
-    });
-</script>
-
-{% endblock header %}
 
 
 
@@ -408,109 +450,80 @@ animation: fadeEffect 1s;
     <div class="text-center">
         <h1 style="">Loan Services</h1>
     </div>
-    {% comment %} <div class="service-item text-center">
-
-        <div class="item" class="personal-loan-front">
-            <i class="fa fa-user" style="color: aqua;"> </i> <br><span><a href="#">Personal Loan</a> </span>
-        </div>
-
-        <div class="item">
-            <i class="fa fa-briefcase" style="color: rgb(255, 0, 170);"></i> <br><span><a href="#">BUSINESS LOAN
-                </a></span>
-        </div>
-        <div class="item">
-            <i class="fa fa-stethoscope" style="color: rgb(0, 0, 255);"></i> <br><span><a href="#">Doctor
-                    Loan</a></span>
-        </div>
-        <div class="item">
-            <i class="fa bi-house-fill" style="color: rgb(0, 255, 13);"></i> <br><span><a href="#">Home Loan</a></span>
-        </div>
-        <div class="item">
-            <i class="fa bi-house" style="color: rgb(0, 255, 13);"></i> <br><span><a href="#">Loan Against
-                    Property</a></span>
-        </div>
-        <div class="item">
-            <i class="fa fa-car" style="color: rgb(174, 0, 255);"></i> <br><span><a href="#">Car Loan</a></span>
-        </div>
-    </div> {% endcomment %}
 
     <div class="row">
         <div class="col-md">
-            <div class="flip-card">
+            <div class="flip-card" onclick="personal_loan_calculator()" >
+
                 <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <i class="fa fa-user" style="color: aqua;"> </i> <br><span><a href="#">Personal Loan</a> </span><br>
-                        <img src="{% static 'img/flip_card.gif' %}" alt="" style="width:20%; height:auto; margin-top:8px;">
+                    <div class="flip-card-front" id="personal_loan_flip_card">
+                        <i class="fa fa-user"> </i> <br><span> Personal Loan 
+                        </span><br>
                     </div>
-                    <div class="flip-card-back " style="text-align:left;">
-                        <center><span>Personal Loan</span> </center>
-                        <div style="width:90%; margin:10px;border:1px solid gray;"></div>
-                        <a href="#" style="text-align:left;"> -> Government</a><br>
-                        <a href="#" style="text-align:left;"> -> Private</a>
-                    </div>
+                        <div class="flip-card-back " style="text-align:left;">
+                            <center><span style="font-size:16px;">Personal Loan</span> </center>
+                            <div style="width:90%; margin:10px;border:1px solid gray;"></div>
+                            -> Government <br>
+                            -> Private
+                        </div>
                 </div>
             </div>
         </div>
         <div class="col-md">
-            <div class="flip-card">
+            <div class="flip-card" onclick="business_loan_calculator()">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <i class="fa fa-briefcase" style="color: rgb(255, 0, 170);"></i> <br><span><a href="#">BUSINESS
-                                LOAN </a></span><br>
-                        <img src="{% static 'img/flip_card.gif' %}" alt="" style="width:20%; height:auto; margin-top:8px;">
+                    <div class="flip-card-front" id="business_loan_flip_card">
+                        <i class="fa fa-briefcase" style="color: rgb(255, 0, 170);"></i> <br><span>BUSINESS
+                            LOAN </span><br>
                     </div>
                     <div class="flip-card-back " style="text-align:left;">
-                        <center><span>Business Loan</span> </center>
+                        <center><span style="font-size:16px;">Business Loan</span> </center>
                         <div style="width:90%; margin:10px;border:1px solid gray;"></div>
-                        <a href="#" style="text-align:left;">Business Vintage > 3years</a><br>
-                        <a href="#" style="text-align:left;">Business Vintage < 3years </a> </div> </div> </div> </div>
-                                <div class="col-md">
-                                <div class="flip-card">
-                                    <div class="flip-card-inner">
-                                        <div class="flip-card-front">
-                                            <i class="fa fa-stethoscope" style="color: rgb(0, 0, 255);"></i>
-                                            <br><span><a href="#">Doctor Loan</a></span><br>
-                        <img src="{% static 'img/flip_card.gif' %}" alt="" style="width:20%; height:auto; margin-top:8px;">
-                    </div>
-                                        <div class="flip-card-back ">
-                                            <center><span>Doctor Loan</span> </center>
-                                            <div style="width:90%; margin:10px;border:1px solid gray;"></div>
-                                            <a href="#" style="text-align:left;">Click Me</a><br>
-                                        </div>
+                        Business Vintage > 3years <br>
+                        Business Vintage < 3years </div> </div> </div> </div> <div class="col-md">
+                            <div class="flip-card" onclick="doctor_loan_calculator()">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front" id="doctor_loan_flip_card">
+                                        <i class="fa fa-stethoscope" style="color: rgb(0, 0, 255);"></i>
+                                        <br><span> Doctor Loan </span><br>
+                                    </div>
+                                    <div class="flip-card-back ">
+                                        <center><span style="font-size:16px;">Doctor Loan</span> </center>
+                                        <div style="width:90%; margin:10px;border:1px solid gray;"></div>
+                                        Click Me <br>
                                     </div>
                                 </div>
+                            </div>
                     </div>
 
 
                     <div class="col-md">
-                        <div class="flip-card">
+                        <div class="flip-card" onclick="home_loan_calculator()">
                             <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <i class="fa bi-house-fill" style="color: rgb(0, 255, 13);"></i> <br><span><a
-                                            href="#">Home Loan</a></span><br>
-                        <img src="{% static 'img/flip_card.gif' %}" alt="" style="width:20%; height:auto; margin-top:8px;">
-                    </div>
+                                <div class="flip-card-front" id="home_loan_flip_card">
+                                    <i class="fa bi-house-fill" style="color: rgb(0, 255, 13);"></i> <br><span> Home Loan</span><br>
+                                </div>
                                 <div class="flip-card-back " style="text-align:left;">
-                                    <center><span>Home Loan</span> </center>
+                                    <center><span style="font-size:16px;">Home Loan</span> </center>
                                     <div style="width:90%; margin:10px;border:1px solid gray;"></div>
-                                    <a href="#" style="text-align:left;">Loan Against Property</a><br>
+                                    Loan Against Property
+                                    <br>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md">
-                        <div class="flip-card">
+                        <div class="flip-card" onclick="car_loan_calculator()">
                             <div class="flip-card-inner">
-                                <div class="flip-card-front">
-                                    <i class="fa fa-car" style="color: rgb(174, 0, 255);"></i> <br><span><a href="#">Car
-                                            Loan</a></span><br>
-                        <img src="{% static 'img/flip_card.gif' %}" alt="" style="width:20%; height:auto; margin-top:8px;">
-                    </div>
+                                <div class="flip-card-front" id="car_loan_flip_card">
+                                    <i class="fa fa-car" style="color: rgb(174, 0, 255);"></i> <br><span> Car
+                                            Loan </span><br>
+                                </div>
                                 <div class="flip-card-back ">
-                                    <center><span>Car Loan</span> </center>
+                                    <center><span style="font-size:16px;">Car Loan</span> </center>
                                     <div style="width:90%; margin:10px;border:1px solid gray;"></div>
-                                    <a href="#">Click Me</a><br>
+                                    Click Me<br>
                                 </div>
                             </div>
                         </div>
@@ -524,11 +537,10 @@ animation: fadeEffect 1s;
 </div>
 <!-- Servicess Stop -->
 
-
-
+ 
 
 <!-- Calculator Start -->
-<section class="calculator mt-3 bg-light">
+<section class="calculator mt-3 bg-light" id="calculator-section">
     <div class="text-center">
         <h1>Calculate loan structure</h1>
     </div>
@@ -608,12 +620,6 @@ animation: fadeEffect 1s;
                         id="loan-calculator">
                         <h4 class="alert alert-danger text-center">Calculate your EMI for Home Loan</h4>
 
-                        {% comment %} <div class="tab-menu">
-                            <div class="menu-item">Home Loan</div>
-                            <div class="menu-item">Home Loan Balance Transfer</div>
-                            <div class="menu-item">Top up Loan</div>
-                        </div> {% endcomment %}
-
                         <div class="tab-menu">
                             <button class="tablinks" onclick="OpenTabDecription(event, 'home_loan_tab_1')"
                                 id="home_loan_defaultOpen">Home Loan</button>
@@ -680,6 +686,205 @@ animation: fadeEffect 1s;
 
 
                 <!-- ===========================
+                                Personal Loan section Stop 
+                            =============================-->
+
+                <div class="row" id="personal-loan-section">
+                    <div class="col-sm-4 " data-aos="zoom-in" data-aos-delay="100" data-aos-duration="1500">
+                        <div class="loan-card">
+                            <br>
+                            <div class="loan-card-header-banner">
+                                <i class="fa fa-car text-danger" style=""></i>
+                            </div>
+                            <h4 class="text-danger mt-2 ">Personal Loan</h4>
+                            <p style="text-align: justify; margin: 15px;">A Car loan is a secured loan product where the
+                                procured vehicle acts as customary security or collateral.</p>
+                            <br>
+                            <ul>
+                                <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The documents of your
+                                    vehicle will be
+                                    retained by the Bank.</li>
+                                <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; A loan amount of up to
+                                    60-70% of the car on
+                                    road value will be offered by the Bank.</li>
+                                <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The borrower can use the
+                                    vehicle during the
+                                    loan period.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-8" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1500"
+                        id="loan-calculator">
+                        <h4 class="alert alert-danger text-center">Calculate your EMI for Personal Loan</h4>
+
+                        <div class="tab-menu">
+                            <button class="tablinks" onclick="OpenTabDecription(event, 'personal_loan_tab_1')"
+                                id="personal_loan_defaultOpen">Car Loan</button>
+                            <button class="tablinks"
+                                onclick="OpenTabDecription(event, 'personal_loan_tab_2')">other</button>
+                        </div>
+
+                        <div id="personal_loan_tab_1" class="tabcontent">
+                            {% include "loan_calculator_templates/personal_loan.html" %}
+                        </div>
+
+                        <div id="personal_loan_tab_2" class="tabcontent">
+                            <h3>Other Information</h3>
+                            <p>write here loan related other information.</p>
+                        </div>
+
+
+                        <a href="{% url 'loan_application_form' %}" class="mt-2 btn btn-danger">Apply
+                            now</a>
+                        <a href="#" class="mt-2 text-danger ml-3"
+                            style="vertical-align:bottom;text-decoration:none;">Read More</a>
+                    </div>
+                </div>
+                <!-- ===========================
+                                            Personal Loan section Stop 
+                                        =============================-->
+
+
+
+
+
+                <!-- ===========================
+                                Business Loan section Stop 
+                            =============================-->
+
+                <div class="row" id="business-loan-section">
+                    <div class="col-sm-4 " data-aos="zoom-in" data-aos-delay="100" data-aos-duration="1500">
+                        <div class="loan-card">
+                            <br>
+                            <div class="loan-card-header-banner">
+                                <i class="fa fa-car text-danger" style=""></i>
+                            </div>
+                            <h4 class="text-danger mt-2 ">Business Loan</h4>
+                            <p style="text-align: justify; margin: 15px;">A Car loan is a secured loan product where the
+                                procured vehicle acts as customary security or collateral.</p>
+                            <br>
+                            <ul>
+                                <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The documents of your
+                                    vehicle will be
+                                    retained by the Bank.</li>
+                                <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; A loan amount of up to
+                                    60-70% of the car on
+                                    road value will be offered by the Bank.</li>
+                                <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The borrower can use the
+                                    vehicle during the
+                                    loan period.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-8" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1500"
+                        id="loan-calculator">
+                        <h4 class="alert alert-danger text-center">Calculate your EMI for Business Loan</h4>
+
+                        <div class="tab-menu">
+                            <button class="tablinks" onclick="OpenTabDecription(event, 'business_loan_tab_1')"
+                                id="business_loan_defaultOpen">Car Loan</button>
+                            <button class="tablinks"
+                                onclick="OpenTabDecription(event, 'business_loan_tab_2')">other</button>
+                        </div>
+
+                        <div id="business_loan_tab_1" class="tabcontent">
+                            {% include "loan_calculator_templates/business_loan.html" %}
+                        </div>
+
+                        <div id="business_loan_tab_2" class="tabcontent">
+                            <h3>Other Information</h3>
+                            <p>write here loan related other information.</p>
+                        </div>
+
+
+                        <a href="{% url 'loan_application_form' %}" class="mt-2 btn btn-danger">Apply
+                            now</a>
+                        <a href="#" class="mt-2 text-danger ml-3"
+                            style="vertical-align:bottom;text-decoration:none;">Read More</a>
+                    </div>
+                </div>
+                <!-- ===========================
+                                            Business Loan section Stop 
+                                        =============================-->
+
+
+
+
+
+
+                <!-- ===========================
+                                Doctor Loan section Stop 
+                            =============================-->
+
+                <div class="row" id="doctor-loan-section">
+                    <div class="col-sm-4 " data-aos="zoom-in" data-aos-delay="100" data-aos-duration="1500">
+                        <div class="loan-card">
+                            <br>
+                            <div class="loan-card-header-banner">
+                                <i class="fa fa-car text-danger" style=""></i>
+                            </div>
+                            <h4 class="text-danger mt-2 ">Doctor Loan</h4>
+                            <p style="text-align: justify; margin: 15px;">A Car loan is a secured loan product where the
+                                procured vehicle acts as customary security or collateral.</p>
+                            <br>
+                            <ul>
+                                <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The documents of your
+                                    vehicle will be
+                                    retained by the Bank.</li>
+                                <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; A loan amount of up to
+                                    60-70% of the car on
+                                    road value will be offered by the Bank.</li>
+                                <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The borrower can use the
+                                    vehicle during the
+                                    loan period.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-8" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1500"
+                        id="loan-calculator">
+                        <h4 class="alert alert-danger text-center">Calculate your EMI for Doctor Loan</h4>
+
+                        <div class="tab-menu">
+                            <button class="tablinks" onclick="OpenTabDecription(event, 'doctor_loan_tab_1')"
+                                id="doctor_loan_defaultOpen">Car Loan</button>
+                            <button class="tablinks"
+                                onclick="OpenTabDecription(event, 'doctor_loan_tab_2')">other</button>
+                        </div>
+
+                        <div id="doctor_loan_tab_1" class="tabcontent">
+                            {% include "loan_calculator_templates/doctor_loan.html" %}
+                        </div>
+
+                        <div id="doctor_loan_tab_2" class="tabcontent">
+                            <h3>Other Information</h3>
+                            <p>write here loan related other information.</p>
+                        </div>
+
+
+                        <a href="{% url 'loan_application_form' %}" class="mt-2 btn btn-danger">Apply
+                            now</a>
+                        <a href="#" class="mt-2 text-danger ml-3"
+                            style="vertical-align:bottom;text-decoration:none;">Read More</a>
+                    </div>
+                </div>
+                <!-- ===========================
+                                            Doctor Loan section Stop 
+                                        =============================-->
+
+
+
+
+
+                <!-- ===========================
                                 Car Loan section Stop 
                             =============================-->
 
@@ -688,7 +893,7 @@ animation: fadeEffect 1s;
                         <div class="loan-card">
                             <br>
                             <div class="loan-card-header-banner">
-                                <i class="fa fa-home text-danger" style=""></i>
+                                <i class="fa fa-car text-danger" style=""></i>
                             </div>
                             <h4 class="text-danger mt-2 ">Car Loan</h4>
                             <p style="text-align: justify; margin: 15px;">A Car loan is a secured loan product where the
@@ -696,13 +901,16 @@ animation: fadeEffect 1s;
                             <br>
                             <ul>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The documents of your vehicle will be
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The documents of your
+                                    vehicle will be
                                     retained by the Bank.</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; A loan amount of up to 60-70% of the car on
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; A loan amount of up to
+                                    60-70% of the car on
                                     road value will be offered by the Bank.</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The borrower can use the vehicle during the
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The borrower can use the
+                                    vehicle during the
                                     loan period.</li>
                             </ul>
                         </div>
@@ -741,6 +949,8 @@ animation: fadeEffect 1s;
 
 
 
+
+
                 <!-- ===========================
                                 Education Loan section Stop 
                             =============================-->
@@ -750,7 +960,7 @@ animation: fadeEffect 1s;
                         <div class="loan-card">
                             <br>
                             <div class="loan-card-header-banner">
-                                <i class="fa fa-home text-danger" style=""></i>
+                                <i class="fas fa-graduation-cap text-danger"></i>
                             </div>
                             <h4 class="text-danger mt-2 ">Education Loan</h4>
                             <p style="text-align: justify; margin: 15px;">An Education Loan is a secured loan product
@@ -759,13 +969,16 @@ animation: fadeEffect 1s;
                             <br>
                             <ul>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The loan is offered keeping the guardian as
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The loan is offered
+                                    keeping the guardian as
                                     the guarantor after his/her paying capacity is ascertained.</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The loan amount is deferred until the
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; The loan amount is
+                                    deferred until the
                                     student is placed on a job.</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; This Loan can be availed by students as
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; This Loan can be availed
+                                    by students as
                                     well as experienced professionals.</li>
                             </ul>
                         </div>
@@ -813,7 +1026,7 @@ animation: fadeEffect 1s;
                         <div class="loan-card">
                             <br>
                             <div class="loan-card-header-banner">
-                                <i class="fa fa-home text-danger" style=""></i>
+                                <i class="fas fa-credit-card text-danger" style=""></i>
                             </div>
                             <h4 class="text-danger mt-2 ">Lifestyle Credit Card</h4>
                             <p style="text-align: justify; margin: 15px;">Discover a wide range of offers on dining,
@@ -824,9 +1037,11 @@ animation: fadeEffect 1s;
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
                                         class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Dining offers</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Access to 100+ Airport lounges</li>
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Access to 100+ Airport
+                                    lounges</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Amazing welcome rewards</li>
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Amazing welcome rewards
+                                </li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
                                         class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Movie ticket offers</li>
                             </ul>
@@ -844,13 +1059,15 @@ animation: fadeEffect 1s;
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
                                     class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Dining offers</li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Access to 100+ Airport lounges</li>
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Access to 100+ Airport
+                                lounges</li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
                                     class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Amazing welcome rewards</li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
                                     class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Movie ticket offers</li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Extra discounts on shopping from associated
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Extra discounts on shopping
+                                from associated
                                 partners and more.</li>
                         </ul>
                         <a href="{% url 'loan_application_form' %}" class="mt-2 btn btn-danger">Apply
@@ -878,7 +1095,7 @@ animation: fadeEffect 1s;
                         <div class="loan-card">
                             <br>
                             <div class="loan-card-header-banner">
-                                <i class="fa fa-home text-danger" style=""></i>
+                                <i class="fas fa-credit-card text-danger" style=""></i>
                             </div>
                             <h4 class="text-danger mt-2 ">Travel Card</h4>
                             <p style="text-align: justify; margin: 15px;">Make travel payments at railway stations,
@@ -887,14 +1104,18 @@ animation: fadeEffect 1s;
                             <br>
                             <ul>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Welcome travel gift vouchers.</li>
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Welcome travel gift
+                                    vouchers.</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Discounts and offers on domestic and
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Discounts and offers on
+                                    domestic and
                                     international flights.</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Reward points on air ticket bookings.</li>
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Reward points on air
+                                    ticket bookings.</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Complimentary airport lounge access and a
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Complimentary airport
+                                    lounge access and a
                                     lot more.</li>
                             </ul>
                         </div>
@@ -910,16 +1131,21 @@ animation: fadeEffect 1s;
 
                         <ul>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Welcome travel gift vouchers,</li>
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Welcome travel gift
+                                vouchers,</li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Discounts and offers on domestic and
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Discounts and offers on
+                                domestic and
                                 international flights.</li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Reward points on air ticket bookings.</li>
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Reward points on air ticket
+                                bookings.</li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Cashback on fuel purchases,</li>
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Cashback on fuel purchases,
+                            </li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Complimentary airport lounge access and a lot
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Complimentary airport lounge
+                                access and a lot
                                 more.</li>
                         </ul>
                         <a href="{% url 'loan_application_form' %}" class="mt-2 btn btn-danger">Apply
@@ -947,7 +1173,7 @@ animation: fadeEffect 1s;
                         <div class="loan-card">
                             <br>
                             <div class="loan-card-header-banner">
-                                <i class="fa fa-home text-danger" style=""></i>
+                                <i class="fas fa-credit-card text-danger" style=""></i>
                             </div>
                             <h4 class="text-danger mt-2 ">Shopping Card</h4>
                             <p style="text-align: justify; margin: 15px;">A shopping credit card is your best companion
@@ -956,16 +1182,20 @@ animation: fadeEffect 1s;
                             <br>
                             <ul>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Earn great reward points on every purchase
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Earn great reward points
+                                    on every purchase
                                 </li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Great offers and cashback at partner stores
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Great offers and
+                                    cashback at partner stores
                                 </li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Reward points can be redeemed and utilized
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Reward points can be
+                                    redeemed and utilized
                                     on future shopping</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Enjoy surcharge waiver on fuel transactions
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Enjoy surcharge waiver
+                                    on fuel transactions
                                     and a lot more…</li>
                             </ul>
                         </div>
@@ -979,15 +1209,19 @@ animation: fadeEffect 1s;
                             credit cards offer a great shopping experience with ease and comfort! So, Go out & Shop!</p>
                         <ul>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Earn great reward points on every purchase</li>
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Earn great reward points on
+                                every purchase</li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Great offers and cashback at partner stores
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Great offers and cashback at
+                                partner stores
                             </li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Reward points can be redeemed and utilized on
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Reward points can be
+                                redeemed and utilized on
                                 future shopping</li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Enjoy surcharge waiver on fuel transactions and
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Enjoy surcharge waiver on
+                                fuel transactions and
                                 a lot more…</li>
                         </ul>
 
@@ -1016,7 +1250,7 @@ animation: fadeEffect 1s;
                         <div class="loan-card">
                             <br>
                             <div class="loan-card-header-banner">
-                                <i class="fa fa-home text-danger" style=""></i>
+                                <i class="fas fa-credit-card text-danger" style=""></i>
                             </div>
                             <h4 class="text-danger mt-2 ">Rewards Card</h4>
                             <p style="text-align: justify; margin: 15px;">Reward points and their redemption options
@@ -1026,12 +1260,15 @@ animation: fadeEffect 1s;
                             <br>
                             <ul>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Earn reward points on every rupee spent
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Earn reward points on
+                                    every rupee spent
                                 </li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Diverse Redeemable Options</li>
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Diverse Redeemable
+                                    Options</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Offers great savings</li>
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Offers great savings
+                                </li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
                                         class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Easy to use</li>
                             </ul>
@@ -1046,9 +1283,11 @@ animation: fadeEffect 1s;
                             purchases.</p>
                         <ul>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Earn reward points on every rupee spent</li>
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Earn reward points on every
+                                rupee spent</li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Diverse Redeemable Options</li>
+                                    class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Diverse Redeemable Options
+                            </li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
                                     class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Offers great savings</li>
                             <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
@@ -1080,7 +1319,7 @@ animation: fadeEffect 1s;
                         <div class="loan-card">
                             <br>
                             <div class="loan-card-header-banner">
-                                <i class="fa fa-home text-danger" style=""></i>
+                                <i class="fas fa-shield-alt text-danger" style=""></i>
                             </div>
                             <h4 class="text-danger mt-2 ">Health Insurance</h4>
                             <p style="text-align: justify; margin: 15px;">Multiple insurance schemes for you to choose
@@ -1093,11 +1332,13 @@ animation: fadeEffect 1s;
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
                                         class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Car Insurance</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Bike Insurance & more.</li>
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Bike Insurance & more.
+                                </li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
                                         class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Low-cost Insurance</li>
                                 <li style="text-align: left; margin: 15px;"><i style="font-size:14px;"
-                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Premium rates for women and non-tobacco
+                                        class="fa fa-arrow-circle-right text-danger"></i>&nbsp; Premium rates for women
+                                    and non-tobacco
                                     users & more.</li>
                             </ul>
                         </div>
@@ -1240,7 +1481,7 @@ animation: fadeEffect 1s;
                                                 <!-- Body -->
                                                 <div class="media-body">
                                                     <h6 class="pmd-list-title">RECEIVE A CALL FROM
-                                                        RULOANS'
+                                                        MoneyTrust'
                                                         TEAM FOR FACE TO FACE GUIDANCE</h6>
                                                     <p class="pmd-list-subtitle" style="font-size:14px;">
                                                         Once your application is received, our financial
@@ -1282,7 +1523,7 @@ animation: fadeEffect 1s;
                                                         PARTNER
                                                         AGREEMENT</h6>
                                                     <p class="pmd-list-subtitle" style="font-size:14px;">You
-                                                        will be asked to sign a Ruloans Business Partner
+                                                        will be asked to sign a MoneyTrust Business Partner
                                                         Agreement to legalise your partnership with us.
                                                     </p>
                                                 </div>
@@ -1297,10 +1538,10 @@ animation: fadeEffect 1s;
                                                 </a>
                                                 <!-- Body -->
                                                 <div class="media-body">
-                                                    <h6 class="pmd-list-title">YOU'RE RULOANS BUSINESS
+                                                    <h6 class="pmd-list-title">YOU'RE MoneyTrust BUSINESS
                                                         PARTNER</h6>
                                                     <p class="pmd-list-subtitle" style="font-size:14px;">
-                                                        Congratulations, you are now a Ruloans Business
+                                                        Congratulations, you are now a MoneyTrust Business
                                                         Partner.</p>
                                                 </div>
                                             </li>
@@ -1433,7 +1674,7 @@ animation: fadeEffect 1s;
                                                         PARTNER
                                                         AGREEMENT</h6>
                                                     <p class="pmd-list-subtitle" style="font-size:14px;">You
-                                                        will be asked to sign a Ruloans Business Partner
+                                                        will be asked to sign a MoneyTrust Business Partner
                                                         Agreement to legalise your partnership with us.
                                                     </p>
                                                 </div>
@@ -1478,7 +1719,7 @@ animation: fadeEffect 1s;
 
 
 <!-- About Start -->
-<div class="container-fluid py-5">
+<div class="container-fluid py-5" id="about-section">
     <div class="container">
         <div class="row gx-5" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
             <div class="col-lg-5 mb-5 mb-lg-0">
@@ -1493,7 +1734,7 @@ animation: fadeEffect 1s;
                     <h1 class="display-6">We Help Our Clients To Achieve Their Desired Goals</h1>
                 </div>
                 <p style="text-align: justify;" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
-                    With a PAN India presence across 100+ cities, Ruloans is one of the
+                    With a PAN India presence across 100+ cities, MoneyTrust is one of the
                     leading credit lending establishment founded by professionals and financial experts who
                     with an
                     experience of 25 years have created a rich profile of satisfying the needs of more than
@@ -1793,38 +2034,96 @@ animation: fadeEffect 1s;
 
 
 
-<!-- Servicess Start -->
-<div class="container-fluid  service-cards mt-5"
-    style="position: relative; transform: translateY(0rem); background: none; box-shadow: none;">
-    <div class="text-center" style="color:black;">
-        <h1>Our Partners</h1>
-    </div>
-    <div class="service-item text-center">
-        <div class="item" style="box-shadow: 0px 0px 7px black;" data-aos="flip-left" data-aos-delay="100"
-            data-aos-duration="2000">
-            <img src="{% static 'img/logo (1).png' %}" style="width: 100%;" alt="">
+
+
+
+<!-- ======= Our Clients Section ======= -->
+<section id="clients">
+    <div class="container" data-aos="zoom-in">
+
+        <div class="text-center">
+            <h1>Authorized Channel Partner</h1>
         </div>
 
-        <div class="item" style="box-shadow: 0px 0px 10px black;" data-aos="flip-left" data-aos-delay="100"
-            data-aos-duration="2000">
-            <img src="{% static 'img/logo (2).jpg' %}" style="width: 100%;" alt="">
+        <div class="clients-slider swiper">
+            <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide"><img src="{% static 'img/banks/bank-logo-1.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="swiper-slide"><img src="{% static 'img/banks/bank-logo-2.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="swiper-slide"><img src="{% static 'img/banks/bank-logo-3.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="swiper-slide"><img src="{% static 'img/banks/bank-logo-4.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="swiper-slide"><img src="{% static 'img/banks/bank-logo-5.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="swiper-slide"><img src="{% static 'img/banks/bank-logo-6.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="swiper-slide"><img src="{% static 'img/banks/bank-logo-7.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="swiper-slide"><img src="{% static 'img/banks/bank-logo-8.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="swiper-slide"><img src="{% static 'img/banks/bank-logo-9.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="swiper-slide"><img src="{% static 'img/banks/bank-logo-10.png' %}" class="img-fluid" alt="">
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
         </div>
-        <div class="item" style="box-shadow: 0px 0px 10px black;" data-aos="flip-left" data-aos-delay="100"
-            data-aos-duration="2000">
-            <img src="{% static 'img/logo (3).png' %}" style="width: 100%;" alt="">
-        </div>
-        <div class="item" style="box-shadow: 0px 0px 10px black;" data-aos="flip-left" data-aos-delay="100"
-            data-aos-duration="2000">
-            <img src="{% static 'img/logo (4).jpg' %}" style="width: 100%;" alt="">
-        </div>
-        <div class="item" style="box-shadow: 0px 0px 10px black;" data-aos="flip-left" data-aos-delay="100"
-            data-aos-duration="2000">
-            <img src="{% static 'img/logo (5).jpg' %}" style="width: 100%;" alt="">
-        </div>
-    </div>
-</div>
-<!-- Servicess Start -->
 
+    </div>
+</section><!-- End Our Clients Section -->
+
+
+<script>
+    /**
+     * Clients Slider
+     */
+    new Swiper('.clients-slider', {
+        speed: 400,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false
+        },
+        slidesPerView: 'auto',
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true
+        },
+        breakpoints: {
+            320: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+            480: {
+                slidesPerView: 3,
+                spaceBetween: 20
+            },
+            640: {
+                slidesPerView: 4,
+                spaceBetween: 20
+            },
+            992: {
+                slidesPerView: 6,
+                spaceBetween: 20
+            }
+        }
+    });
+
+    /**
+     * Animation on scroll
+     */
+    window.addEventListener('load', () => {
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        })
+    });
+</script>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script>
@@ -1890,5 +2189,230 @@ animation: fadeEffect 1s;
     }
     document.getElementById("home_loan_defaultOpen").click();
 </script>
+
+
+
+
+
+
+
+
+
+<script>
+                    
+    function personal_loan_calculator() {
+        document.getElementById('personal-loan-section').style.animation = 'fadeEffect 1s';
+
+        document.getElementById('home-loan-section').style.display = 'none';
+        document.getElementById('personal-loan-section').style.display = 'flex';
+        document.getElementById('business-loan-section').style.display = 'none';
+        document.getElementById('doctor-loan-section').style.display = 'none';
+        document.getElementById('car-loan-section').style.display = 'none';
+        document.getElementById('education-loan-section').style.display = 'none';
+
+        // Cards       
+        document.getElementById('cards_lifestyle_section').style.display = 'none';
+        document.getElementById('cards_travel_and_fuel_section').style.display = 'none';
+        document.getElementById('cards_shoping_card_section').style.display = 'none';
+        document.getElementById('cards_reward_card_section').style.display = 'none';
+
+        // Insurance       
+        document.getElementById('insurance_health_section').style.display = 'none';
+
+
+        document.getElementById('personal_loan_flip_card').style.background = 'none';
+        document.getElementById('personal_loan_flip_card').style.color = '#fff';
+        document.getElementById('business_loan_flip_card').style.background = '#fff';
+        document.getElementById('business_loan_flip_card').style.color = 'black';
+        document.getElementById('doctor_loan_flip_card').style.background = '#fff';
+        document.getElementById('doctor_loan_flip_card').style.color = 'black';
+        document.getElementById('home_loan_flip_card').style.background = '#fff';
+        document.getElementById('home_loan_flip_card').style.color = 'black';
+        document.getElementById('car_loan_flip_card').style.background = '#fff';
+        document.getElementById('car_loan_flip_card').style.color = 'black';
+
+        // default tab open 
+        document.getElementById("personal_loan_defaultOpen").click();
+
+        document.getElementById('calculator-section').scrollIntoView(true);
+
+
+
+    }
+
+
+
+    function business_loan_calculator() {
+        document.getElementById('business-loan-section').style.animation = 'fadeEffect 1s';
+
+        document.getElementById('home-loan-section').style.display = 'none';
+        document.getElementById('personal-loan-section').style.display = 'none';
+        document.getElementById('business-loan-section').style.display = 'flex';
+        document.getElementById('doctor-loan-section').style.display = 'none';
+        document.getElementById('car-loan-section').style.display = 'none';
+        document.getElementById('education-loan-section').style.display = 'none';
+
+        // Cards       
+        document.getElementById('cards_lifestyle_section').style.display = 'none';
+        document.getElementById('cards_travel_and_fuel_section').style.display = 'none';
+        document.getElementById('cards_shoping_card_section').style.display = 'none';
+        document.getElementById('cards_reward_card_section').style.display = 'none';
+
+        // Insurance       
+        document.getElementById('insurance_health_section').style.display = 'none';
+
+
+        document.getElementById('personal_loan_flip_card').style.background = '#fff';
+        document.getElementById('personal_loan_flip_card').style.color = 'black';
+        document.getElementById('business_loan_flip_card').style.background = 'none';
+        document.getElementById('business_loan_flip_card').style.color = '#fff';
+        document.getElementById('doctor_loan_flip_card').style.background = '#fff';
+        document.getElementById('doctor_loan_flip_card').style.color = 'black';
+        document.getElementById('home_loan_flip_card').style.background = '#fff';
+        document.getElementById('home_loan_flip_card').style.color = 'black';
+        document.getElementById('car_loan_flip_card').style.background = '#fff';
+        document.getElementById('car_loan_flip_card').style.color = 'black';
+
+        document.getElementById('calculator-section').scrollIntoView(true);
+
+        // default tab open 
+        document.getElementById("business_loan_defaultOpen").click();
+    }
+
+
+
+
+
+    function doctor_loan_calculator() {
+        document.getElementById('doctor-loan-section').style.animation = 'fadeEffect 1s';
+
+        document.getElementById('home-loan-section').style.display = 'none';
+        document.getElementById('personal-loan-section').style.display = 'none';
+        document.getElementById('business-loan-section').style.display = 'none';
+        document.getElementById('doctor-loan-section').style.display = 'flex';
+        document.getElementById('car-loan-section').style.display = 'none';
+        document.getElementById('education-loan-section').style.display = 'none';
+
+        // Cards       
+        document.getElementById('cards_lifestyle_section').style.display = 'none';
+        document.getElementById('cards_travel_and_fuel_section').style.display = 'none';
+        document.getElementById('cards_shoping_card_section').style.display = 'none';
+        document.getElementById('cards_reward_card_section').style.display = 'none';
+
+        // Insurance       
+        document.getElementById('insurance_health_section').style.display = 'none';
+
+
+        document.getElementById('personal_loan_flip_card').style.background = '#fff';
+        document.getElementById('personal_loan_flip_card').style.color = 'black';
+        document.getElementById('business_loan_flip_card').style.background = '#fff';
+        document.getElementById('business_loan_flip_card').style.color = 'black';
+        document.getElementById('doctor_loan_flip_card').style.background = 'none';
+        document.getElementById('doctor_loan_flip_card').style.color = '#fff';
+        document.getElementById('home_loan_flip_card').style.background = '#fff';
+        document.getElementById('home_loan_flip_card').style.color = 'black';
+        document.getElementById('car_loan_flip_card').style.background = '#fff';
+        document.getElementById('car_loan_flip_card').style.color = 'black';
+
+
+
+        document.getElementById('calculator-section').scrollIntoView(true);
+        // default tab open 
+        document.getElementById("doctor_loan_defaultOpen").click();
+    }
+
+
+
+
+
+    function home_loan_calculator() {
+        document.getElementById('home-loan-section').style.animation = 'fadeEffect 1s';
+
+        document.getElementById('home-loan-section').style.display = 'flex';
+        document.getElementById('personal-loan-section').style.display = 'none';
+        document.getElementById('business-loan-section').style.display = 'none';
+        document.getElementById('doctor-loan-section').style.display = 'none';
+        document.getElementById('car-loan-section').style.display = 'none';
+        document.getElementById('education-loan-section').style.display = 'none';
+
+        // Cards       
+        document.getElementById('cards_lifestyle_section').style.display = 'none';
+        document.getElementById('cards_travel_and_fuel_section').style.display = 'none';
+        document.getElementById('cards_shoping_card_section').style.display = 'none';
+        document.getElementById('cards_reward_card_section').style.display = 'none';
+
+        // Insurance       
+        document.getElementById('insurance_health_section').style.display = 'none';
+
+
+
+        document.getElementById('personal_loan_flip_card').style.background = '#fff';
+        document.getElementById('personal_loan_flip_card').style.color = 'black';
+        document.getElementById('business_loan_flip_card').style.background = '#fff';
+        document.getElementById('business_loan_flip_card').style.color = 'black';
+        document.getElementById('doctor_loan_flip_card').style.background = '#fff';
+        document.getElementById('doctor_loan_flip_card').style.color = 'black';
+        document.getElementById('home_loan_flip_card').style.background = 'none';
+        document.getElementById('home_loan_flip_card').style.color = '#fff';
+        document.getElementById('car_loan_flip_card').style.background = '#fff';
+        document.getElementById('car_loan_flip_card').style.color = 'black';
+
+
+        document.getElementById('calculator-section').scrollIntoView(true);
+
+        // default tab open 
+        document.getElementById("home_loan_defaultOpen").click();
+    }
+
+
+
+
+
+
+    function car_loan_calculator() {
+        document.getElementById('car-loan-section').style.animation = 'fadeEffect 1s';
+
+        document.getElementById('home-loan-section').style.display = 'none';
+        document.getElementById('personal-loan-section').style.display = 'none';
+        document.getElementById('business-loan-section').style.display = 'none';
+        document.getElementById('doctor-loan-section').style.display = 'none';
+        document.getElementById('car-loan-section').style.display = 'flex';
+        document.getElementById('education-loan-section').style.display = 'none';
+
+        // Cards       
+        document.getElementById('cards_lifestyle_section').style.display = 'none';
+        document.getElementById('cards_travel_and_fuel_section').style.display = 'none';
+        document.getElementById('cards_shoping_card_section').style.display = 'none';
+        document.getElementById('cards_reward_card_section').style.display = 'none';
+
+        // Insurance       
+        document.getElementById('insurance_health_section').style.display = 'none';
+
+
+
+        document.getElementById('personal_loan_flip_card').style.background = '#fff';
+        document.getElementById('personal_loan_flip_card').style.color = 'black';
+        document.getElementById('business_loan_flip_card').style.background = '#fff';
+        document.getElementById('business_loan_flip_card').style.color = 'black';
+        document.getElementById('doctor_loan_flip_card').style.background = '#fff';
+        document.getElementById('doctor_loan_flip_card').style.color = 'black';
+        document.getElementById('home_loan_flip_card').style.background = '#fff';
+        document.getElementById('home_loan_flip_card').style.color = 'black';
+        document.getElementById('car_loan_flip_card').style.background = 'none';
+        document.getElementById('car_loan_flip_card').style.color = '#fff';
+
+        document.getElementById('calculator-section').scrollIntoView(true);
+
+        // default tab open 
+        document.getElementById("car_loan_defaultOpen").click();
+    }
+</script>
+
+
+
+
+
+
+
 
 {% endblock content %}
